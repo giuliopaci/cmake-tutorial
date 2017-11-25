@@ -34,6 +34,7 @@ It is also difficult to exploit multiple processors, if available.
 * No incremental build
 * No build-time customization
 * No parallel building
+* Files are usually created in the source directory
 
 Build using Makefile
 --------------------
@@ -119,9 +120,25 @@ make -j clean
 * Little integration with most IDE
 * Confusing/limited/error-prone syntax
 * Hard to reliably reproduce builds due to large use of environment variables
+* Files are usually created in the source directory
 
-Build using CMake + Makefile
-----------------------------
+Build using CMake
+-----------------
+
+`cmake` goal is to overcome the issues of `make` while still take advantage of its benefits.
+In particular `cmake` introduces a configuration step, just before the build step.
+The configuration step is responsible to configure the build step, by taking into account
+user input and environment variables. The results of the configuration step is stored
+into files so that user input and environment variabled will not be used at build time,
+thus granting reliable, reproducible builds.
+`cmake` is commonly used to produce build files for other build systems (e.g., `make`, `ninja`,
+`Visual Studio`, `Xcode`, ...); as these files are automatically created they are
+generally much more reliable and consistent than manually created ones. They also
+tend to provide many more functionalities.
+`cmake` input consists of `CMakeLists.txt` files, which describes the project
+to be built, `*.cmake` files, which contains collections of cmake macro that can
+be used in `CMakeLists.txt` for specific tasks, `*.in` files that are used
+as templates for automatically generated files.
 
 ### Configure ###
 
@@ -131,59 +148,7 @@ cd build
 cmake .. -DCMAKE_INSTALL_PREFIX=install  -DCMAKE_VERBOSE_MAKEFILE=ON
 ```
 
-
-### Compile ###
-
-```
-make -j
-```
-
-### Install ###
-
-```
-make -j install
-```
-
-### Clean ###
-
-```
-make -j clean
-```
-
-Build using CMake + Ninja
-----------------------------
-
-### Configure ###
-
-```
-mkdir -p build-ninja
-cd build-ninja
-cmake .. -GNinja -DCMAKE_INSTALL_PREFIX=install
-```
-
-
-### Compile ###
-
-```
-ninja
-```
-
-### Install ###
-
-```
-ninja install
-```
-
-### Clean ###
-
-```
-ninja clean
-```
-
-Cross-build using CMake + Makefile
-----------------------------------
-
-### Configure ###
+### Configure for cross-compilation with Mingw ###
 
 ```
 mkdir -p build-mingw32
@@ -191,7 +156,6 @@ cd build-mingw32
 cmake .. -DCMAKE_INSTALL_PREFIX=install  -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_TOOLCHAIN_FILE=../toolchains/Toolchain-mingw32.cmake
 ```
 
-
 ### Compile ###
 
 ```
@@ -209,35 +173,38 @@ make -j install
 ```
 make -j clean
 ```
+### Configure for ninja ###
 
-Build + Coverage test using CMake + Makefile
---------------------------------------------
+```
+mkdir -p build-ninja
+cd build-ninja
+cmake .. -GNinja -DCMAKE_INSTALL_PREFIX=install
+```
 
-### Configure ###
+### Compile with ninja ###
+
+```
+ninja
+```
+
+### Install with ninja ###
+
+```
+ninja install
+```
+
+### Clean with ninja ###
+
+```
+ninja clean
+```
+
+### Configure for Debug ###
 
 ```
 mkdir -p build
 cd build
 cmake .. -DCMAKE_INSTALL_PREFIX=install  -DCMAKE_VERBOSE_MAKEFILE=ON -DCMAKE_BUILD_TYPE=Debug
-```
-
-
-### Compile ###
-
-```
-make -j
-```
-
-### Install ###
-
-```
-make -j install
-```
-
-### Clean ###
-
-```
-make -j clean
 ```
 
 ### Test ###
