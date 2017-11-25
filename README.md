@@ -114,6 +114,7 @@ make -j clean
 * Incremental build
 * Partial build-time customization
 * Parallel building
+* Good and clear documentation ([GNU Make manual](https://www.gnu.org/software/make/manual/))
 
 ### Cons ###
 
@@ -218,6 +219,25 @@ make -j test
 ```
 make -j coverage
 ```
+
+### Pros ###
+
+* Mostly standard
+* Good integration with most IDE
+* Incremental build
+* Good prebuild-time customization
+* Parallel building
+* Reproducible builds
+* Output files created outside of the source directory
+* Highly modular
+* Extensive documentation ([CMake 3.10 documentation](https://cmake.org/cmake/help/v3.10/))
+
+### Cons ###
+
+* Powerful for C/C++ builds, but not very much for other tasks
+* Many features depend on a specific version of `cmake`
+* Syntax is not uniform and confusing
+* Scarce introductory documentation, very limited use case descriptions, very limited examples
 
 Run
 ===
