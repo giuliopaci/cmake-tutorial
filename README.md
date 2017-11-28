@@ -4,7 +4,7 @@ Build
 Build using scripts
 -------------------
 
-In order to build a software with scripts, you just have to add build
+In order to build a software with [scripts](build.sh), you just have to add build
 instructions to a script. Writing a script is easy and you can do almost
 any kind of processing. However it is not easy to make a good, portable,
 customizable build processing. It is also difficult to properly implement
@@ -44,7 +44,7 @@ Its main goals are reliability, incremental building and parallel
 building. `make` achieves most of its goals by expressing each
 build step (rule, in `make` terminology) in terms of preconditions
 and expected results (targets, in `make` terminology).
-Rules are written in files called `Makefile`.
+Rules are written in files called [Makefile](Makefile).
 Each rule is defined by a result target name, a list of prerequisite
 target names, a sequence of commands that, given the prerequisites
 allows to build the result. Each target is implicitly associated to
@@ -136,7 +136,7 @@ thus granting reliable, reproducible builds.
 `Visual Studio`, `Xcode`, ...); as these files are automatically created they are
 generally much more reliable and consistent than manually created ones. They also
 tend to provide many more functionalities.
-`cmake` input consists of `CMakeLists.txt` files, which describes the project
+`cmake` input consists of [CMakeLists.txt](CMakeLists.txt) files, which describes the project
 to be built, `*.cmake` files, which contains collections of cmake macro that can
 be used in `CMakeLists.txt` for specific tasks, `*.in` files that are used
 as templates for automatically generated files.
