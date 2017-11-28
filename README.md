@@ -1,3 +1,11 @@
+Description
+===========
+
+In this repository you will find material used to introduce CMake and building tools.
+In its present form it is not intended as a complete tutorial, but it contains useful material to showcase CMake and building tools in a seminar.
+
+For a tutorial that you can easily follow step by step, without additional information, refer to [cmake-tutorial](https://cmake.org/cmake-tutorial/).
+
 Build
 =====
 
