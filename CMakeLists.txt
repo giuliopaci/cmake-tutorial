@@ -22,7 +22,7 @@ if(NOT WANT_TESTS)
   set(WANT_COVERAGE OFF)
 endif()
 
-if(CMAKE_BUILD_TYPE MATCHES DEBUG)
+if(NOT CMAKE_BUILD_TYPE MATCHES "Debug")
   set(WANT_COVERAGE OFF)
 endif()
 
@@ -71,8 +71,15 @@ add_executable(main4 main3.c)
 target_link_libraries(main4 phw-shared)
 target_include_directories(main4 PRIVATE $<TARGET_PROPERTY:phw-shared,INTERFACE_INCLUDE_DIRECTORIES>)
 
+# https://cmake.org/cmake/help/v3.10/command/add_subdirectory.html
+add_subdirectory(libphw2)
+
+add_executable(main5 main3.c)
+target_link_libraries(main5 phw2)
+target_include_directories(main5 PRIVATE $<TARGET_PROPERTY:phw2,INTERFACE_INCLUDE_DIRECTORIES>)
+
 # https://cmake.org/cmake/help/v3.10/command/install.html
-install(TARGETS main main2 main3 main4 phw phw-shared
+install(TARGETS main main2 main3 main4 main5 phw phw-shared
   RUNTIME DESTINATION bin
   ARCHIVE DESTINATION lib
   LIBRARY DESTINATION lib
@@ -95,12 +102,15 @@ if(WANT_TESTS)
 
   add_test(test-main4 ${TARGET_SYSTEM_EMULATOR} main4)
   set_tests_properties(test-main4 PROPERTIES PASS_REGULAR_EXPRESSION "^Hello world!\n$")
+
+  add_test(test-main5 ${TARGET_SYSTEM_EMULATOR} main5)
+  set_tests_properties(test-main5 PROPERTIES PASS_REGULAR_EXPRESSION "^Hello world!\n$")
 endif()
 
 if(WANT_COVERAGE)
   setup_target_for_coverage(
     NAME coverage
     EXECUTABLE ctest -j ${PROCESSOR_COUNT}
-    DEPENDENCIES main main2 main3 main4
+    DEPENDENCIES main main2 main3 main4 main5
     )
 endif()
