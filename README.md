@@ -247,6 +247,111 @@ make -j coverage
 * Syntax is not uniform and confusing
 * Scarce introductory documentation, very limited use case descriptions, very limited examples
 
+Compare build time
+==================
+
+Build time for scripts
+----------------------
+
+```
+# first build time
+time ./build.sh
+# second build time
+time ./build.sh
+# 1 source diff build time
+touch main3.c
+time ./build.sh
+# clean
+./build.sh clean
+```
+
+Build time for make
+-------------------
+
+```
+# first build time
+time make
+# second build time
+time make
+# 1 source diff build time
+touch main3.c
+time make
+# clean
+make clean
+```
+
+Build time for parallel make
+----------------------------
+
+```
+# first build time
+time make -j
+# second build time
+time make -j
+# 1 source diff build time
+touch main3.c
+time make -j
+# clean
+make clean
+```
+
+Build time for cmake + make
+---------------------------
+
+```
+# first build time
+mkdir -p build
+cd build
+# first build time
+time (cmake .. -DWANT_COVERAGE=NO && make)
+# second build time
+time make
+# 1 source diff build time
+touch main3.c
+time make
+# clean
+cd ..
+rm -fr build
+```
+
+Build time for cmake + parallel make
+------------------------------------
+
+```
+# first build time
+mkdir -p build
+cd build
+# first build time
+time (cmake .. -DWANT_COVERAGE=NO && make -j)
+# second build time
+time make -j
+# 1 source diff build time
+touch main3.c
+time make -j
+# clean
+cd ..
+rm -fr build
+```
+
+Build time for cmake + parallel ninja
+-------------------------------------
+
+```
+# first build time
+mkdir -p build
+cd build
+# first build time
+time (cmake .. -DWANT_COVERAGE=NO -GNinja && ninja)
+# second build time
+time ninja
+# 1 source diff build time
+touch main3.c
+time ninja
+# clean
+cd ..
+rm -fr build
+```
+
 Run
 ===
 
