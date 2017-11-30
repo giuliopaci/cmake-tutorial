@@ -76,6 +76,16 @@ case "$1" in
 ./builds/"$PLATFORM"/speect/engine/tests/speect_test -m text -t "Hi everybody." -v "`pwd`"/voices/cmu_arctic_slt/voice.json -o tmp.wav
 EOF
         ;;
+    "clean")
+	rm -fr builds
+	rm -fr install
+	rm -f tmp.wav*
+	;;
+    "no-download")
+        "$0" build_deps
+        "$0" build
+        "$0" run
+        ;;
     *)
         "$0" download
         "$0" download_deps
