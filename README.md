@@ -6,6 +6,18 @@ In its present form it is not intended as a complete tutorial, but it contains u
 
 For a tutorial that you can easily follow step by step, without additional information, refer to [cmake-tutorial](https://cmake.org/cmake-tutorial/).
 
+Prerequisites
+=============
+
+In order to execute the comnands described in this file you will need several tools, such as `cmake`, `make`, `gcc`,  `ninja`, `gcov`, `lcov`.
+
+On a Debian-based system you can install them with:
+
+```
+sudo apt-get install cmake make gcc ninja gcov lcov
+
+```
+
 Build
 =====
 
