@@ -1,5 +1,10 @@
 #!/bin/sh
 
+# This scripts requires several tools in order to work, such as:
+# git curl gcc cmake swig libxml2-dev python-dev.
+# On a Debian system they can be installed by:
+# apt-get install git curl gcc cmake swig libxml2-dev python-dev
+
 # Detect platform
 PLATFORM="`uname -m`-`uname -s`"
 BASEDIR=`pwd`
